@@ -1,10 +1,26 @@
-import React from 'react';
+import React from "react";
+import Header from "./components/Header";
+import styled from "@emotion/styled";
+
+const Container = styled.div`
+  max-width: 600px;
+  margin: 0 auto;
+`;
+const FormContainer = styled.div`
+   background-color: #fff;
+   padding: 3rem; 
+`
 
 function App() {
-    return ( 
+  return (
+    <Container>
+      <Header title="Quote Insurance" />
 
-        <h1> Quote </h1>
-     );
+      <FormContainer>
+          
+      </FormContainer>
+    </Container>
+  );
 }
- 
+
 export default App;
