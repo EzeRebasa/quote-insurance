@@ -1,6 +1,9 @@
 import React from "react";
 import Header from "./components/Header";
+import Form from './components/Form';
+
 import styled from "@emotion/styled";
+
 
 const Container = styled.div`
   max-width: 600px;
@@ -17,7 +20,8 @@ function App() {
       <Header title="Quote Insurance" />
 
       <FormContainer>
-          
+        <Form />
+        
       </FormContainer>
     </Container>
   );
