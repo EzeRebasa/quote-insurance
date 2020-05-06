@@ -50,7 +50,7 @@ const Error = styled.div`
   margin-bottom: 2rem;
 `;
 
-const Form = ({setSummary}) => {
+const Form = ({setSummary, setLoading}) => {
 
   const [data, setData] = useState({
     brand: "",
@@ -96,20 +96,25 @@ const Form = ({setSummary}) => {
     // European 30% ""
     result = calculateBrand(brand) * result;
 
-    console.log(result);
-
     // Basic increase 20%
 
     // Complete 50%
     const incrementPlan = getPlan(plan);
     result = parseFloat(incrementPlan * result).toFixed(2);
 
-    console.log(result);
+    setLoading(true);
 
-    setSummary({
-      quote: result,
-      data
-    })
+    setTimeout(() => {
+      // Remove the spinner
+      setLoading(false);
+      // Pass the info to main component
+      setSummary({
+        quote: result,
+        data
+      });
+    },3000)
+
+    
     // Total
   }
 

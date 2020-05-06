@@ -1,13 +1,13 @@
 import React, { Fragment } from "react";
-import styled from '@emotion/styled';
-import { firstUppercase } from '../helper';
+import styled from "@emotion/styled";
+import { firstUppercase } from "../helper";
 
 const SummaryContainer = styled.div`
-    padding: 1rem;
-    text-align: center;
-    background-color: #00838f;
-    color: #fff;
-    margin-top: 1rem;
+  padding: 1rem;
+  text-align: center;
+  background-color: #00838f;
+  color: #fff;
+  margin-top: 1rem;
 `;
 
 const Summary = ({ data }) => {
@@ -20,7 +20,7 @@ const Summary = ({ data }) => {
     <SummaryContainer>
       <h2> Summary of quote </h2>
       <ul>
-  <li> Brand: {firstUppercase(brand)} </li>
+        <li> Brand: {firstUppercase(brand)} </li>
         <li> Plan: {firstUppercase(plan)} </li>
         <li> Year: {year} </li>
       </ul>

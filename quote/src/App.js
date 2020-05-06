@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import Form from './components/Form';
 import Summary from './components/Summary';
 import Result from './components/Result';
+import Spinner from './components/Spinner';
 
 import styled from "@emotion/styled";
 
@@ -26,6 +27,8 @@ function App() {
       plan: ''
     }
   });
+
+  const [ loading, setLoading ] = useState(false);
   
   // Extract data
   const { quote, data } = summary;
@@ -37,15 +40,20 @@ function App() {
       <FormContainer>
         <Form 
           setSummary = { setSummary } 
+          setLoading= {setLoading}
         />
-        
+        {loading ? <Spinner /> : null }
+            
         <Summary 
           data = {data}
         />
-
-        <Result
-          quote= {quote}
-        />
+        
+        { !loading ? 
+             <Result
+             quote= {quote}
+           /> : null
+        }
+       
       </FormContainer>
     </Container>
   );
