@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "@emotion/styled";
+import PropTypes from 'prop-types';
 import { getDifferenceYear,calculateBrand, getPlan } from '../helper';
 
 const Field = styled.div`
@@ -86,11 +87,8 @@ const Form = ({setSummary, setLoading}) => {
 
     // Get the difference of years
     const difference = getDifferenceYear(year);
-
-    console.log(difference);
     // For each year substract the 3%
     result -= ((difference * 3) *result) / 100;
-    console.log(result);
     // American 15% increment
     // Asiatic 5% ""
     // European 30% ""
@@ -109,7 +107,7 @@ const Form = ({setSummary, setLoading}) => {
       setLoading(false);
       // Pass the info to main component
       setSummary({
-        quote: result,
+        quote: Number(result),
         data
       });
     },3000)
@@ -177,6 +175,12 @@ const Form = ({setSummary, setLoading}) => {
       <Button type="submit"> Quote </Button>
     </form>
   );
-};
+}
+
+Form.propTypes = {
+  setSummary: PropTypes.func.isRequired,
+  setLoading: PropTypes.func.isRequired
+
+}
 
 export default Form;

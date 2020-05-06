@@ -1,5 +1,6 @@
-import React, { Fragment } from "react";
+import React from "react";
 import styled from "@emotion/styled";
+import PropTypes from 'prop-types';
 import { firstUppercase } from "../helper";
 
 const SummaryContainer = styled.div`
@@ -27,5 +28,9 @@ const Summary = ({ data }) => {
     </SummaryContainer>
   );
 };
+
+Summary.propTypes = {
+    data: PropTypes.object.isRequired
+}
 
 export default Summary;
