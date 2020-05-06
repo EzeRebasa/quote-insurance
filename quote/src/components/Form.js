@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "@emotion/styled";
+import { getDifferenceYear,calculateBrand, getPlan } from '../helper';
 
 const Field = styled.div`
   display: flex;
@@ -40,13 +41,24 @@ const Button = styled.button`
   }
 `;
 
-const Form = () => {
+const Error = styled.div`
+  background-color: red;
+  color: white;
+  padding: 1rem;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 2rem;
+`;
+
+const Form = ({setSummary}) => {
 
   const [data, setData] = useState({
     brand: "",
     year: "",
     plan: "",
   });
+
+  const [ error, setError ] = useState(false);
 
   // Extract state values
   const { brand, year, plan } = data;
@@ -59,8 +71,53 @@ const Form = () => {
       })
   }
 
+  // When the user press submit
+  const quoteInsurance = e => {
+    e.preventDefault();
+
+    if( brand.trim() === '' || year.trim() === '' || plan.trim() === '') {
+      setError(true);
+      return;
+    }
+    setError(false);
+
+    // Base of $2000
+    let result = 2000;
+
+    // Get the difference of years
+    const difference = getDifferenceYear(year);
+
+    console.log(difference);
+    // For each year substract the 3%
+    result -= ((difference * 3) *result) / 100;
+    console.log(result);
+    // American 15% increment
+    // Asiatic 5% ""
+    // European 30% ""
+    result = calculateBrand(brand) * result;
+
+    console.log(result);
+
+    // Basic increase 20%
+
+    // Complete 50%
+    const incrementPlan = getPlan(plan);
+    result = parseFloat(incrementPlan * result).toFixed(2);
+
+    console.log(result);
+
+    setSummary({
+      quote: result,
+      data
+    })
+    // Total
+  }
+
   return (
-    <form>
+    <form
+      onSubmit={quoteInsurance}
+    >
+      {error ? <Error> All fields are obligatories </Error> : null }
       <Field>
         <Label> Brand </Label>
         <Select
@@ -112,7 +169,7 @@ const Form = () => {
         /> Complete
       </Field>
 
-      <Button type="button"> Quote </Button>
+      <Button type="submit"> Quote </Button>
     </form>
   );
 };
